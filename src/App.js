@@ -11,6 +11,7 @@ import {Login} from '../src/components/login/login'
 import {Register} from '../src/components/register/register'
 import { useState } from 'react';
 import Protected from './components/Protected'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 
 

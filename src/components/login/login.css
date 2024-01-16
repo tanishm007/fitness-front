@@ -32,3 +32,17 @@
     outline: none;
     cursor: pointer;
 }
+
+.imp-info{
+    margin-top: 5px;
+    align-items: center;
+    text-align: center;
+}
+
+.head{
+    color:red
+}
+
+#form{
+    margin-left: 20px;
+}

@@ -30,13 +30,13 @@ const navigate = useNavigate();
         <Link to = "/login" style = {{textDecoration : 'none', color : '#3A1212'}}>Login</Link>
        
     </Stack>
-    <Nav variant="pills" activeKey="1" onSelect={handleSelect}>
-              <NavDropdown title = {name} id="nav-dropdown">
-              <NavDropdown.Item onClick={logOut}>{logout}</NavDropdown.Item>
-            </NavDropdown>
+    {name && (
+        <Nav variant="pills" activeKey="1" onSelect={handleSelect}>
+          <NavDropdown title={name} id="nav-dropdown">
+            <NavDropdown.Item onClick={logOut}>{logout}</NavDropdown.Item>
+          </NavDropdown>
         </Nav>
-        
-    
+      )}
    </Stack>
    
    

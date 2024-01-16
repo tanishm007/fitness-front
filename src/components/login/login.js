@@ -13,6 +13,8 @@ import { useEffect } from "react"
         password:""
     })
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = e => {
         const { name, value } = e.target
         setUser({
@@ -22,7 +24,7 @@ import { useEffect } from "react"
     }
    
     const login = () => {
-        
+        setLoading(true);
         axios.post("https://fitness-back-5jw0.onrender.com/login", user)
         .then(res => {
           
@@ -34,7 +36,13 @@ import { useEffect } from "react"
             localStorage.setItem('user_data',res.data.user);
             navigate('/')
 
-        })
+        }).catch((error) => {
+            console.error("Login error: ", error);
+            alert("Login failed. Please try again.");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
     }
     useEffect(() => {
       let login = localStorage.getItem('login');
@@ -46,21 +54,36 @@ import { useEffect } from "react"
     
 
     return (
+        <>   
+        <div className = "imp-info">  
+
+        <h2 className="head">IMP : Login and Register may take 30sec to 1 min to login </h2>
+        <h3>Default Login Credential</h3>
+        <h3>Email: tanish@gmail.com</h3>
+        <h3>Password: tanish</h3>
+        </div>
         <section  style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100vh',
-          }}>
+            height: '80vh',
+        }}>
+           
             <div className="register">
-                <div className="col-1">
+                <div >
            
                     <span>login and enjoy the service</span>
         <form id='form' className='flex flex-col'>
             <h1>Login</h1>
             <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
             <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
-            <div className="btn" onClick={login}>Login</div>
+            <div className="btn" onClick={login}> {loading ? (
+                  <div className="spinner-border text-light" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <div>Login</div>
+                )}</div>
             <div>or</div>
             <div className="btn" onClick={() => navigate('/register')}>Register</div>
         </form>
@@ -68,6 +91,7 @@ import { useEffect } from "react"
           
           </div>
       </section>
+              </>
     )
 }
 
